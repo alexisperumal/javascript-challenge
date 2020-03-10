@@ -7,17 +7,10 @@ var tableData = data;
 var tbody = d3.select("tbody");  // Reference to tdata html tag (table data)
 var button = d3.select("#filter-btn");  // Button reference
 var inputField = d3.select("#datetime");
+var form = d3.select("form");
 
-// document.getElementById("datetime").addEventListener('submit', function(event){
-//     event.preventDefault();
-// });
-
-inputField.on('submit', function(event) {
-    event.preventDefault();
-})
-
-inputField.submit(function(event) {
-    event.preventDefault();
+form.on('submit', function() {
+    d3.event.preventDefault();
 })
 
 
