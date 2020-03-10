@@ -9,9 +9,26 @@ var button = d3.select("#filter-btn");  // Button reference
 var inputField = d3.select("#datetime");
 var form = d3.select("form");
 
-form.on('submit', function() {
+// form.on('submit', function() {
+//     d3.event.preventDefault();
+// })
+
+// You can also define the click handler inline
+form.on("submit", function() {
     d3.event.preventDefault();
-})
+    filter_date = inputField.property("value");
+    let date_str = inputField.property("value").toString();
+    if (date_str.length == 0) {
+        clear_table()
+        create_table_body(tableData);
+    } else {
+        // console.log(`Filter by date ${date_str}.`)
+        var filteredData = tableData.filter(sighting => sighting.datetime === filter_date);
+        // console.log(filteredData);
+        clear_table();
+        create_table_body(filteredData);
+    }
+  });
 
 
 
@@ -32,23 +49,7 @@ function clear_table() {
     while(rowCount--) myTable.deleteRow(rowCount); 
 }
 
-// You can also define the click handler inline
-button.on("click", function() {
-    // console.log("Hi, a button was clicked!");
-    // console.log(inputField);
-    filter_date = inputField.property("value");
-    let date_str = inputField.property("value").toString();
-    if (date_str.length == 0) {
-        clear_table()
-        create_table_body(tableData);
-    } else {
-        // console.log(`Filter by date ${date_str}.`)
-        var filteredData = tableData.filter(sighting => sighting.datetime === filter_date);
-        // console.log(filteredData);
-        clear_table();
-        create_table_body(filteredData);
-    }
-  });
+
 
 create_table_body(tableData);
 
